@@ -11,7 +11,7 @@ RationalValues*
 
 .*
 !.gitignore
-_book
+_book/
 node_modules/
 
 ### Python template
