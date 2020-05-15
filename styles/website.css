@@ -1,0 +1,13 @@
+h1,
+h2 {
+  border-bottom: 1px solid #eeeeee;
+}
+
+pre[class*='language-'] {
+  /* border: none;
+  background-color: #f7f7f7;
+  font-size: 1em;
+  line-height: 1.2em; */
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.3) 2px 3px 2px;
+}
