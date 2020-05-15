@@ -1079,59 +1079,59 @@
 <li>&#x8BBE;&#x7F6E;&#x6240;&#x6709;&#x8282;&#x70B9;&#x7684;&#x4E3B;&#x673A;&#x540D;&#x548C;IP&#x5730;&#x5740;&#xFF0C;&#x540C;&#x65F6;&#x4F7F;&#x7528;&#x5185;&#x90E8;DNS&#x6216;&#x8005;/etc/hosts&#x505A;&#x597D;&#x4E3B;&#x673A;&#x540D;&#x89E3;&#x6790;&#x3002;</li>
 </ul>
 <h3 id="&#x521D;&#x59CB;&#x5316;&#x811A;&#x672C;">&#x521D;&#x59CB;&#x5316;&#x811A;&#x672C;</h3>
-<pre class="language-"><code class="lang-shell"><span class="token function">wget</span> -c http://download.opsbase.cn:8000/init/exec.sh <span class="token comment"># &#x8FDC;&#x7A0B;&#x811A;&#x672C;</span>
-<span class="token function">bash</span> exec.sh xxx-1
+<pre class="language-"><code class="lang-shell">wget -c http://download.opsbase.cn:8000/init/exec.sh # &#x8FDC;&#x7A0B;&#x811A;&#x672C;
+bash exec.sh xxx-1
 </code></pre>
-<pre class="language-"><code class="lang-shell"><span class="token shebang important">#!/bin/bash</span>
-<span class="token comment"># --------------------------------------------------</span>
-<span class="token comment">#Author:  LJ</span>
-<span class="token comment">#Email:   admin@attacker.club</span>
+<pre class="language-"><code class="lang-shell">#!/bin/bash
+# --------------------------------------------------
+#Author:  LJ
+#Email:   admin@attacker.club
 
-<span class="token comment"># bash templateos_init.sh  TemplateOS</span>
+# bash templateos_init.sh  TemplateOS
 
-<span class="token keyword">function</span> <span class="token function-name function">color_message</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token keyword">case</span> <span class="token string">&quot;<span class="token variable">$1</span>&quot;</span> <span class="token keyword">in</span>
-  <span class="token string">&quot;warn&quot;</span><span class="token punctuation">)</span>
-    <span class="token builtin class-name">echo</span> -e <span class="token string">&quot;<span class="token entity" title="\e">\e</span>[1;31m<span class="token variable">$2</span><span class="token entity" title="\e">\e</span>[0m&quot;</span>
-    <span class="token punctuation">;</span><span class="token punctuation">;</span>
-  <span class="token string">&quot;info&quot;</span><span class="token punctuation">)</span>
-    <span class="token builtin class-name">echo</span> -e <span class="token string">&quot;<span class="token entity" title="\e">\e</span>[1;33m<span class="token variable">$2</span><span class="token entity" title="\e">\e</span>[0m&quot;</span>
-    <span class="token punctuation">;</span><span class="token punctuation">;</span>
-  <span class="token keyword">esac</span>
-<span class="token punctuation">}</span>
+function color_message() {
+  case &quot;$1&quot; in
+  &quot;warn&quot;)
+    echo -e &quot;\e[1;31m$2\e[0m&quot;
+    ;;
+  &quot;info&quot;)
+    echo -e &quot;\e[1;33m$2\e[0m&quot;
+    ;;
+  esac
+}
 
-<span class="token keyword">function</span> <span class="token function-name function">confirm</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token builtin class-name">read</span> -p <span class="token string">&apos;Are you sure to Continue?[Y/n]:&apos;</span> answer
-  <span class="token keyword">case</span> <span class="token variable">$answer</span> <span class="token keyword">in</span>
-  Y <span class="token operator">|</span> y<span class="token punctuation">)</span>
-    <span class="token builtin class-name">echo</span> -e <span class="token string">&quot;<span class="token entity" title="\n">\n</span><span class="token entity" title="\t">\t</span><span class="token entity" title="\t">\t</span><span class="token entity" title="\e">\e</span>[44;37m Running the script <span class="token entity" title="\e">\e</span>[0m<span class="token entity" title="\n">\n</span>&quot;</span>
-    <span class="token punctuation">;</span><span class="token punctuation">;</span>
-  N <span class="token operator">|</span> n<span class="token punctuation">)</span>
-    <span class="token builtin class-name">echo</span> -e <span class="token string">&quot;<span class="token entity" title="\n">\n</span><span class="token entity" title="\t">\t</span><span class="token entity" title="\t">\t</span><span class="token entity" title="\033">\033</span>[41;36mExit the script <span class="token entity" title="\e">\e</span>[0m<span class="token entity" title="\n">\n</span>&quot;</span> <span class="token operator">&amp;&amp;</span> <span class="token builtin class-name">exit</span> <span class="token number">0</span>
-    <span class="token punctuation">;</span><span class="token punctuation">;</span>
-  *<span class="token punctuation">)</span>
-    <span class="token builtin class-name">echo</span> -e <span class="token string">&quot;<span class="token entity" title="\n">\n</span><span class="token entity" title="\t">\t</span><span class="token entity" title="\t">\t</span><span class="token entity" title="\033">\033</span>[41;36mError choice <span class="token entity" title="\e">\e</span>[0m<span class="token entity" title="\n">\n</span>&quot;</span> <span class="token operator">&amp;&amp;</span> <span class="token builtin class-name">exit</span> <span class="token number">1</span>
-    <span class="token punctuation">;</span><span class="token punctuation">;</span>
-  <span class="token keyword">esac</span>
-<span class="token punctuation">}</span>
+function confirm() {
+  read -p &apos;Are you sure to Continue?[Y/n]:&apos; answer
+  case $answer in
+  Y | y)
+    echo -e &quot;\n\t\t\e[44;37m Running the script \e[0m\n&quot;
+    ;;
+  N | n)
+    echo -e &quot;\n\t\t\033[41;36mExit the script \e[0m\n&quot; &amp;&amp; exit 0
+    ;;
+  *)
+    echo -e &quot;\n\t\t\033[41;36mError choice \e[0m\n&quot; &amp;&amp; exit 1
+    ;;
+  esac
+}
 
 confirm
 
-<span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token variable"><span class="token variable">$(</span><span class="token function">id</span> -u<span class="token variable">)</span></span> -ne <span class="token number">0</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
-  color_message <span class="token string">&quot;warn&quot;</span> <span class="token string">&quot;Use root to execute the program !&quot;</span>
-  <span class="token builtin class-name">exit</span> <span class="token number">0</span>
-<span class="token keyword">fi</span>
-<span class="token comment"># &#x5224;&#x65AD;root&#x6743;&#x9650;</span>
+if [ $(id -u) -ne 0 ]; then
+  color_message &quot;warn&quot; &quot;Use root to execute the program !&quot;
+  exit 0
+fi
+# &#x5224;&#x65AD;root&#x6743;&#x9650;
 
-<span class="token function-name function">Init_Install</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+Init_Install() {
   Yum_aliyun_repo
-  <span class="token comment"># Yum_lan_repo</span>
+  # Yum_lan_repo
   Yum_update_pkg
   Selinux_off
-  Set_hostname <span class="token variable">$1</span>
+  Set_hostname $1
   Set_iptables
-  <span class="token comment">#Centos_init</span>
-  <span class="token comment">#Set_IP</span>
+  #Centos_init
+  #Set_IP
   Set_dns
   Set_ntp
   Set_ssh
@@ -1139,170 +1139,170 @@ confirm
   Set_profile
   Set_timezone
   Optimize_Performance
-  <span class="token comment">#Set_passwd</span>
-<span class="token punctuation">}</span>
+  #Set_passwd
+}
 
-<span class="token function-name function">Yum_aliyun_repo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  color_message <span class="token string">&quot;info&quot;</span> <span class="token string">&quot;---- yum install ----&quot;</span>
-  <span class="token comment"># find  /etc/yum.repos.d/ -type f   ! -name &quot;*Base.repo&quot; -exec rm -f {} \;</span>
-  <span class="token function">mkdir</span> /etc/yum.repos.d/tmp
-  <span class="token function">mv</span> /etc/yum.repos.d/*repo /etc/yum.repos.d/tmp
+Yum_aliyun_repo() {
+  color_message &quot;info&quot; &quot;---- yum install ----&quot;
+  # find  /etc/yum.repos.d/ -type f   ! -name &quot;*Base.repo&quot; -exec rm -f {} \;
+  mkdir /etc/yum.repos.d/tmp
+  mv /etc/yum.repos.d/*repo /etc/yum.repos.d/tmp
 
-  <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token variable">$rhel_version</span> <span class="token operator">=</span> <span class="token number">6</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
-    <span class="token function">wget</span> -O /etc/yum.repos.d/alyun-Centos-7.repo http://mirrors.aliyun.com/repo/Centos-6.repo
-    <span class="token function">wget</span> -O /etc/yum.repos.d/aliyun-epel6.repo http://mirrors.aliyun.com/repo/epel-6.repo
+  if [ $rhel_version = 6 ]; then
+    wget -O /etc/yum.repos.d/alyun-Centos-7.repo http://mirrors.aliyun.com/repo/Centos-6.repo
+    wget -O /etc/yum.repos.d/aliyun-epel6.repo http://mirrors.aliyun.com/repo/epel-6.repo
 
-  <span class="token keyword">elif</span> <span class="token punctuation">[</span> <span class="token variable">$rhel_version</span> <span class="token operator">=</span> <span class="token number">7</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
-    <span class="token function">curl</span> -s http://mirrors.aliyun.com/repo/epel-7.repo <span class="token operator">&gt;</span>/etc/yum.repos.d/epel-7.repo
-    <span class="token function">curl</span> -s http://mirrors.aliyun.com/repo/Centos-7.repo <span class="token operator">&gt;</span>/etc/yum.repos.d/aliyun-Centos7.repo
-  <span class="token keyword">else</span>
-    <span class="token builtin class-name">echo</span> <span class="token string">&quot;Unknown version&quot;</span>
-  <span class="token keyword">fi</span>
-<span class="token punctuation">}</span>
-<span class="token function-name function">Yum_lan_repo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  color_message <span class="token string">&quot;info&quot;</span> <span class="token string">&quot;---- yum install ----&quot;</span>
-  <span class="token comment"># find  /etc/yum.repos.d/ -type f   ! -name &quot;*Base.repo&quot; -exec rm -f {} \;</span>
-  <span class="token function">mkdir</span> /etc/yum.repos.d/tmp <span class="token operator">&amp;&amp;</span> <span class="token function">mv</span> /etc/yum.repos.d/*repo /etc/yum.repos.d/tmp
+  elif [ $rhel_version = 7 ]; then
+    curl -s http://mirrors.aliyun.com/repo/epel-7.repo &gt;/etc/yum.repos.d/epel-7.repo
+    curl -s http://mirrors.aliyun.com/repo/Centos-7.repo &gt;/etc/yum.repos.d/aliyun-Centos7.repo
+  else
+    echo &quot;Unknown version&quot;
+  fi
+}
+Yum_lan_repo() {
+  color_message &quot;info&quot; &quot;---- yum install ----&quot;
+  # find  /etc/yum.repos.d/ -type f   ! -name &quot;*Base.repo&quot; -exec rm -f {} \;
+  mkdir /etc/yum.repos.d/tmp &amp;&amp; mv /etc/yum.repos.d/*repo /etc/yum.repos.d/tmp
 
-  <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token variable">$rhel_version</span> <span class="token operator">=</span> <span class="token number">6</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
-    <span class="token function">wget</span> -O /etc/yum.repos.d/alyun-Centos-7.repo http://yum.ops.net/repo/Centos-6.repo
-    <span class="token function">wget</span> -O /etc/yum.repos.d/aliyun-epel6.repo http://yum.ops.net/repo/epel-6.repo
+  if [ $rhel_version = 6 ]; then
+    wget -O /etc/yum.repos.d/alyun-Centos-7.repo http://yum.ops.net/repo/Centos-6.repo
+    wget -O /etc/yum.repos.d/aliyun-epel6.repo http://yum.ops.net/repo/epel-6.repo
 
-  <span class="token keyword">elif</span> <span class="token punctuation">[</span> <span class="token variable">$rhel_version</span> <span class="token operator">=</span> <span class="token number">7</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
-    <span class="token function">curl</span> -s http://yum.ops.net/repo/epel-7.repo <span class="token operator">&gt;</span>/etc/yum.repos.d/epel-7.repo
-    <span class="token function">curl</span> -s http://yum.ops.net/repo/Centos-7.repo <span class="token operator">&gt;</span>/etc/yum.repos.d/aliyun-Centos7.repo
-  <span class="token keyword">else</span>
-    <span class="token builtin class-name">echo</span> <span class="token string">&quot;Unknown version&quot;</span>
-  <span class="token keyword">fi</span>
+  elif [ $rhel_version = 7 ]; then
+    curl -s http://yum.ops.net/repo/epel-7.repo &gt;/etc/yum.repos.d/epel-7.repo
+    curl -s http://yum.ops.net/repo/Centos-7.repo &gt;/etc/yum.repos.d/aliyun-Centos7.repo
+  else
+    echo &quot;Unknown version&quot;
+  fi
 
-<span class="token punctuation">}</span>
+}
 
-<span class="token function-name function">Yum_update_pkg</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token comment">#yum update -y</span>
-  <span class="token comment">#Update all packages</span>
+Yum_update_pkg() {
+  #yum update -y
+  #Update all packages
 
 
-  yum <span class="token function">install</span> chronyd ntpdate -y
-  <span class="token comment"># time</span>
+  yum install chronyd ntpdate -y
+  # time
 
-  yum <span class="token function">install</span> gcc gcc-c++ openssl-devel ntpdate nfs-utils libtool <span class="token punctuation">\</span>
-    openssl-perl ncurses-devel pcre-devel zlib zlib-devel <span class="token function">unzip</span> -y
-  <span class="token comment">#base</span>
+  yum install gcc gcc-c++ openssl-devel ntpdate nfs-utils libtool \
+    openssl-perl ncurses-devel pcre-devel zlib zlib-devel unzip -y
+  #base
 
-  yum <span class="token function">install</span> nmap iotop sysstat dstat iftop nload iperf iproute net-tools <span class="token punctuation">\</span>
-    lrzsz <span class="token function">wget</span> vim-enhanced mlocate <span class="token function">lsof</span> telnet yum-utils dmidecode -y
-  <span class="token comment">#tools</span>
+  yum install nmap iotop sysstat dstat iftop nload iperf iproute net-tools \
+    lrzsz wget vim-enhanced mlocate lsof telnet yum-utils dmidecode -y
+  #tools
 
-  <span class="token comment">#yum install OpenIPMI OpenIPMI-devel OpenIPMI-tools OpenIPMI-libs -y</span>
-  <span class="token comment">#&#x7269;&#x7406;&#x673A;ipmi</span>
-<span class="token punctuation">}</span>
+  #yum install OpenIPMI OpenIPMI-devel OpenIPMI-tools OpenIPMI-libs -y
+  #&#x7269;&#x7406;&#x673A;ipmi
+}
 
-<span class="token function-name function">Set_hostname</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token comment">#bash host_init.sh hostname &#x4E3B;&#x673A;&#x540D;&#x4F20;&#x53C2;</span>
-  <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token variable">$#</span> -lt <span class="token number">1</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
-    <span class="token comment">#&#x4F20;&#x53C2;&#x5C11;&#x4E8E;1&#x4E2A;</span>
-    color_message <span class="token string">&quot;warn&quot;</span> <span class="token string">&quot;---- no set hostname ----&quot;</span>
-    <span class="token assign-left variable"><span class="token environment constant">HOSTNAME</span></span><span class="token operator">=</span><span class="token string">&quot;TemplateOS&quot;</span>
-    <span class="token comment">#&#x9ED8;&#x8BA4;&#x4E3B;&#x673A;&#x540D;TemplateOS</span>
-  <span class="token keyword">else</span>
-    <span class="token assign-left variable"><span class="token environment constant">HOSTNAME</span></span><span class="token operator">=</span><span class="token variable">$1</span>
-  <span class="token keyword">fi</span>
+Set_hostname() {
+  #bash host_init.sh hostname &#x4E3B;&#x673A;&#x540D;&#x4F20;&#x53C2;
+  if [ $# -lt 1 ]; then
+    #&#x4F20;&#x53C2;&#x5C11;&#x4E8E;1&#x4E2A;
+    color_message &quot;warn&quot; &quot;---- no set hostname ----&quot;
+    HOSTNAME=&quot;TemplateOS&quot;
+    #&#x9ED8;&#x8BA4;&#x4E3B;&#x673A;&#x540D;TemplateOS
+  else
+    HOSTNAME=$1
+  fi
 
-  <span class="token keyword">if</span> <span class="token punctuation">[</span> -f /etc/hostname <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
-    <span class="token builtin class-name">echo</span> <span class="token string">&quot;<span class="token environment constant">$HOSTNAME</span>&quot;</span> <span class="token operator">&gt;</span>/etc/hostname
-  <span class="token keyword">fi</span>
-  <span class="token function">sed</span> -i <span class="token string">&quot;/HOSTNAME/c HOSTNAME=<span class="token environment constant">$HOSTNAME</span>&quot;</span> /etc/sysconfig/network <span class="token operator">||</span> <span class="token builtin class-name">echo</span> <span class="token string">&quot;HOSTNAME=<span class="token environment constant">$HOSTNAME</span>&quot;</span> <span class="token operator">&gt;&gt;</span>/etc/sysconfig/network
-  <span class="token function">hostname</span> <span class="token environment constant">$HOSTNAME</span>
-  <span class="token function">grep</span> <span class="token environment constant">$HOSTNAME</span> /etc/hosts <span class="token operator">||</span> <span class="token builtin class-name">echo</span> <span class="token string">&quot;127.0.0.1 <span class="token environment constant">$HOSTNAME</span>&quot;</span> <span class="token operator">&gt;&gt;</span>/etc/hosts
-<span class="token punctuation">}</span>
+  if [ -f /etc/hostname ]; then
+    echo &quot;$HOSTNAME&quot; &gt;/etc/hostname
+  fi
+  sed -i &quot;/HOSTNAME/c HOSTNAME=$HOSTNAME&quot; /etc/sysconfig/network || echo &quot;HOSTNAME=$HOSTNAME&quot; &gt;&gt;/etc/sysconfig/network
+  hostname $HOSTNAME
+  grep $HOSTNAME /etc/hosts || echo &quot;127.0.0.1 $HOSTNAME&quot; &gt;&gt;/etc/hosts
+}
 
-<span class="token function-name function">Selinux_off</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  color_message <span class="token string">&quot;info&quot;</span> <span class="token string">&quot;---- close  selinux ----&quot;</span>
-  <span class="token keyword">if</span> <span class="token punctuation">[</span> -s /etc/selinux/config <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
-    setenforce <span class="token number">0</span>
-    <span class="token function">sed</span> -i <span class="token string">&apos;s/^SELINUX=.*/SELINUX=disabled/g&apos;</span> /etc/selinux/config
-  <span class="token keyword">fi</span>
-<span class="token punctuation">}</span>
+Selinux_off() {
+  color_message &quot;info&quot; &quot;---- close  selinux ----&quot;
+  if [ -s /etc/selinux/config ]; then
+    setenforce 0
+    sed -i &apos;s/^SELINUX=.*/SELINUX=disabled/g&apos; /etc/selinux/config
+  fi
+}
 
-<span class="token function-name function">Set_iptables</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  color_message <span class="token string">&quot;info&quot;</span> <span class="token string">&quot;---- setup iptables ----&quot;</span>
-  <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token operator">!</span> -f /etc/sysconfig/iptables <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
-    yum <span class="token function">install</span> iptables-services -y
-    <span class="token function">chkconfig</span> iptables on
-    systemctl <span class="token builtin class-name">enable</span> iptables
+Set_iptables() {
+  color_message &quot;info&quot; &quot;---- setup iptables ----&quot;
+  if [ ! -f /etc/sysconfig/iptables ]; then
+    yum install iptables-services -y
+    chkconfig iptables on
+    systemctl enable iptables
     systemctl disable firewalld
     systemctl stop firewalld
-    <span class="token function">service</span> iptables restart
-  <span class="token keyword">fi</span>
+    service iptables restart
+  fi
 
   iptables -F
   iptables -X
   iptables -t nat -F
   iptables -t nat -X
   iptables-save
-  <span class="token function">service</span> iptables save
-<span class="token punctuation">}</span>
+  service iptables save
+}
 
-<span class="token function-name function">Centos_init</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+Centos_init() {
 
-  <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token variable">$rhel_version</span> <span class="token operator">=</span> <span class="token number">6</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
-    <span class="token builtin class-name">echo</span> <span class="token operator">&gt;</span>/etc/udev/rules.d/70-persistent-net.rules <span class="token operator">&amp;&gt;</span>/dev/null
-  <span class="token keyword">fi</span>
+  if [ $rhel_version = 6 ]; then
+    echo &gt;/etc/udev/rules.d/70-persistent-net.rules &amp;&gt;/dev/null
+  fi
 
-  <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token variable">$rhel_version</span> <span class="token operator">=</span> <span class="token number">7</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
-    <span class="token function">cp</span> /etc/sysconfig/grub /etc/sysconfig/grub.bak
+  if [ $rhel_version = 7 ]; then
+    cp /etc/sysconfig/grub /etc/sysconfig/grub.bak
     grub2-mkconfig -o /boot/grub2/grub.cfg
-    <span class="token comment">#  net.ifnames=0 biosdevname=0</span>
+    #  net.ifnames=0 biosdevname=0
     systemctl disable NetworkManager
     systemctl stop NetworkManager
-    <span class="token builtin class-name">echo</span> <span class="token operator">&gt;</span>/etc/udev/rules.d/90-eno-fix.rules <span class="token operator">&amp;&gt;</span>/dev/null
-  <span class="token keyword">fi</span>
-<span class="token punctuation">}</span>
+    echo &gt;/etc/udev/rules.d/90-eno-fix.rules &amp;&gt;/dev/null
+  fi
+}
 
-<span class="token function-name function">Set_IP</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  color_message <span class="token string">&quot;info&quot;</span> <span class="token string">&quot;static IPAddress&quot;</span>
-  <span class="token assign-left variable">WAN</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span>route <span class="token operator">|</span> <span class="token function">grep</span> default <span class="token operator">|</span> <span class="token function">head</span> -1 <span class="token operator">|</span> <span class="token function">awk</span> <span class="token string">&apos;{print <span class="token variable">$NF</span>}&apos;</span><span class="token variable">)</span></span>
-  <span class="token comment">#&#x5916;&#x7F51;&#x51FA;&#x63A5;&#x53E3;</span>
-  <span class="token assign-left variable">IPADDR</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token function">ifconfig</span> $WAN <span class="token operator">|</span> <span class="token function">grep</span> inet <span class="token operator">|</span> <span class="token function">awk</span> <span class="token string">&apos;{print <span class="token variable">$2</span>}&apos;</span><span class="token variable">)</span></span>
-  <span class="token assign-left variable">NETMASK</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token function">ifconfig</span> $WAN <span class="token operator">|</span> <span class="token function">grep</span> inet <span class="token operator">|</span> <span class="token function">awk</span> <span class="token string">&apos;{print <span class="token variable">$4</span>}&apos;</span><span class="token variable">)</span></span>
-  <span class="token assign-left variable">GATEWAY</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span>route -n <span class="token operator">|</span> <span class="token function">grep</span> ^0.0.0.0 <span class="token operator">|</span> <span class="token function">awk</span> <span class="token string">&apos;{print <span class="token variable">$2</span>}&apos;</span><span class="token variable">)</span></span>
-  <span class="token assign-left variable">HWADDR</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token function">ifconfig</span> $WAN <span class="token operator">|</span> <span class="token function">awk</span> <span class="token string">&apos;/ether/ {print &quot;HWADDR=&quot;<span class="token variable">$2</span>}&apos;</span><span class="token variable">)</span></span>
-  <span class="token assign-left variable">interface</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token function">ifconfig</span> -a <span class="token operator">|</span> <span class="token function">grep</span> mtu <span class="token operator">|</span> <span class="token function">grep</span> -v $WAN <span class="token operator">|</span> <span class="token function">grep</span> -v lo <span class="token operator">|</span> <span class="token function">awk</span> -F: <span class="token string">&apos;{print <span class="token variable">$1</span>}&apos;</span><span class="token variable">)</span></span>
-  <span class="token assign-left variable">ifcfg</span><span class="token operator">=</span><span class="token string">&quot;/etc/sysconfig/network-scripts/ifcfg-eth&quot;</span>
+Set_IP() {
+  color_message &quot;info&quot; &quot;static IPAddress&quot;
+  WAN=$(route | grep default | head -1 | awk &apos;{print $NF}&apos;)
+  #&#x5916;&#x7F51;&#x51FA;&#x63A5;&#x53E3;
+  IPADDR=$(ifconfig $WAN | grep inet | awk &apos;{print $2}&apos;)
+  NETMASK=$(ifconfig $WAN | grep inet | awk &apos;{print $4}&apos;)
+  GATEWAY=$(route -n | grep ^0.0.0.0 | awk &apos;{print $2}&apos;)
+  HWADDR=$(ifconfig $WAN | awk &apos;/ether/ {print &quot;HWADDR=&quot;$2}&apos;)
+  interface=$(ifconfig -a | grep mtu | grep -v $WAN | grep -v lo | awk -F: &apos;{print $1}&apos;)
+  ifcfg=&quot;/etc/sysconfig/network-scripts/ifcfg-eth&quot;
 
-  <span class="token function">mv</span> <span class="token variable">${ifcfg}</span>-<span class="token variable">$WAN</span> <span class="token variable">${ifcfg}</span><span class="token number">0</span>
-  <span class="token function">cat</span> <span class="token operator">&gt;</span><span class="token variable">${ifcfg}</span><span class="token number">0</span> <span class="token operator">&lt;&lt;</span><span class="token string">EOF
-#version1
-DEVICE=eth0
-BOOTPROTO=none
-ONBOOT=yes
-USERCTL=no
-NM_CONTROLLED=no
-MTU=1454
+  mv ${ifcfg}-$WAN ${ifcfg}0
+  cat &gt;${ifcfg}0 &lt;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>EOF</span>
+<span class="token attr-name">#version1</span>
+<span class="token attr-name">DEVICE</span><span class="token attr-value"><span class="token punctuation">=</span>eth0</span>
+<span class="token attr-name">BOOTPROTO</span><span class="token attr-value"><span class="token punctuation">=</span>none</span>
+<span class="token attr-name">ONBOOT</span><span class="token attr-value"><span class="token punctuation">=</span>yes</span>
+<span class="token attr-name">USERCTL</span><span class="token attr-value"><span class="token punctuation">=</span>no</span>
+<span class="token attr-name">NM_CONTROLLED</span><span class="token attr-value"><span class="token punctuation">=</span>no</span>
+<span class="token attr-name">MTU</span><span class="token attr-value"><span class="token punctuation">=</span>1454</span>
 
-IPADDR=<span class="token variable">$IPADDR</span>
-NETMASK=<span class="token variable">$NETMASK</span>
-GATEWAY=<span class="token variable">$GATEWAY</span>
-<span class="token variable">$HWADDR</span>
-EOF</span>
-<span class="token punctuation">}</span>
+<span class="token attr-name">IPADDR</span><span class="token attr-value"><span class="token punctuation">=</span>$IPADDR</span>
+<span class="token attr-name">NETMASK</span><span class="token attr-value"><span class="token punctuation">=</span>$NETMASK</span>
+<span class="token attr-name">GATEWAY</span><span class="token attr-value"><span class="token punctuation">=</span>$GATEWAY</span>
+<span class="token attr-name">$HWADDR</span>
+<span class="token attr-name">EOF</span>
+<span class="token attr-name">}</span>
 
-<span class="token function-name function">Set_dns</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  color_message <span class="token string">&quot;info&quot;</span> <span class="token string">&quot;dns&quot;</span>
+<span class="token attr-name">Set_dns()</span> <span class="token attr-name">{</span>
+  <span class="token attr-name">color_message</span> <span class="token attr-name">&quot;info&quot;</span> <span class="token attr-name">&quot;dns&quot;</span>
 
-  <span class="token builtin class-name">echo</span> <span class="token string">&quot;nameserver 223.5.5.5&quot;</span> <span class="token operator">&gt;</span>/etc/resolv.conf
-  <span class="token builtin class-name">echo</span> <span class="token string">&quot;nameserver 223.6.6.6&quot;</span> <span class="token operator">&gt;&gt;</span>/etc/resolv.conf
-  <span class="token comment"># &#x963F;&#x91CC;&#x4E91;dns</span>
-<span class="token punctuation">}</span>
+  <span class="token attr-name">echo</span> <span class="token attr-name">&quot;nameserver</span> <span class="token attr-name">223.5.5.5&quot;</span> <span class="token punctuation">&gt;</span></span>/etc/resolv.conf
+  echo &quot;nameserver 223.6.6.6&quot; &gt;&gt;/etc/resolv.conf
+  # &#x963F;&#x91CC;&#x4E91;dns
+}
 
-<span class="token function-name function">Set_ntp</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  color_message <span class="token string">&quot;info&quot;</span> <span class="token string">&quot;dns&quot;</span>
-  <span class="token function">grep</span> ntpdate /var/spool/cron/root <span class="token operator">&amp;&gt;</span>/dev/null <span class="token operator">||</span> <span class="token builtin class-name">echo</span> <span class="token string">&apos;*/3 * * * *  ntpdate ntp.aliyun.com&apos;</span> <span class="token operator">&gt;&gt;</span>/var/spool/cron/root
-  <span class="token comment"># &#x9ED8;&#x8BA4;&#x4F7F;&#x7528;&#x963F;&#x91CC;&#x4E91;&#x65F6;&#x95F4;&#x670D;&#x52A1;</span>
+Set_ntp() {
+  color_message &quot;info&quot; &quot;dns&quot;
+  grep ntpdate /var/spool/cron/root &amp;&gt;/dev/null || echo &apos;*/3 * * * *  ntpdate ntp.aliyun.com&apos; &gt;&gt;/var/spool/cron/root
+  # &#x9ED8;&#x8BA4;&#x4F7F;&#x7528;&#x963F;&#x91CC;&#x4E91;&#x65F6;&#x95F4;&#x670D;&#x52A1;
 
 
 
-<span class="token function">grep</span> ntp.aliyun.com /etc/chrony.conf<span class="token operator">||</span> <span class="token function">cat</span> <span class="token operator">&gt;</span>/etc/chrony.conf <span class="token operator">&lt;&lt;</span><span class="token string">EOF
+grep ntp.aliyun.com /etc/chrony.conf|| cat &gt;/etc/chrony.conf &lt;&lt;EOF
 server ntp.aliyun.com iburst
 server time1.cloud.tencent.com iburst
 # &#x963F;&#x91CC;&#x3001;&#x817E;&#x8BAF;ntp&#x6388;&#x65F6;&#x670D;&#x52A1;&#x5668;
@@ -1314,52 +1314,52 @@ local stratum 10
 
 logchange 0.5
 logdir /var/log/chrony  
-EOF</span>
-<span class="token punctuation">}</span>
+EOF
+}
 
-<span class="token function-name function">Set_timezone</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token punctuation">\</span>cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
-  dmidecode -s system-product-name <span class="token operator">|</span> <span class="token function">awk</span> <span class="token string">&apos;{if(<span class="token variable">$1</span>!~&quot;VMware&quot;)exit 1}&apos;</span> <span class="token operator">||</span> hwclock -w
-  <span class="token function">sed</span>  -i <span class="token string">&apos;/bell-style/c set bell-style none&apos;</span> /etc/inputrc <span class="token comment"># &#x66FF;&#x6362;&#x7981;&#x6B62;&#x6EF4;&#x6EF4;&#x58F0;</span>
-  timedatectl set-timezone <span class="token string">&quot;Asia/Shanghai&quot;</span>
+Set_timezone() {
+  \cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+  dmidecode -s system-product-name | awk &apos;{if($1!~&quot;VMware&quot;)exit 1}&apos; || hwclock -w
+  sed  -i &apos;/bell-style/c set bell-style none&apos; /etc/inputrc # &#x66FF;&#x6362;&#x7981;&#x6B62;&#x6EF4;&#x6EF4;&#x58F0;
+  timedatectl set-timezone &quot;Asia/Shanghai&quot;
 
-<span class="token punctuation">}</span>
+}
 
-<span class="token function-name function">Set_ssh</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  color_message <span class="token string">&quot;info&quot;</span> <span class="token string">&quot;SSH&#x4F18;&#x5316;&quot;</span>
+Set_ssh() {
+  color_message &quot;info&quot; &quot;SSH&#x4F18;&#x5316;&quot;
 
-  <span class="token comment">#sed  -i &apos;/^#Port/c Port 6022&apos;  /etc/ssh/sshd_config  &amp;&gt;/dev/null  # &#x9ED8;&#x8BA4;&#x7AEF;&#x53E3;&#x4FEE;&#x6539;</span>
-  <span class="token function">grep</span> <span class="token string">&apos;#UseDNS yes&apos;</span> /etc/ssh/sshd_config <span class="token operator">&amp;&amp;</span> <span class="token function">sed</span> -i <span class="token string">&quot;s/#UseDNS yes/UseDNS no/g&quot;</span> /etc/ssh/sshd_config
-  <span class="token function">grep</span> <span class="token string">&apos;#AuthorizedKeysFile&apos;</span> /etc/ssh/sshd_config <span class="token operator">&amp;&amp;</span> <span class="token function">sed</span> -i <span class="token string">&quot;s/#AuthorizedKeysFile/AuthorizedKeysFile/&quot;</span> /etc/ssh/sshd_config
-  <span class="token function">grep</span> <span class="token string">&apos;GSSAPIAuthentication yes&apos;</span> /etc/ssh/sshd_config <span class="token operator">&amp;&amp;</span> <span class="token function">sed</span> -i <span class="token string">&quot;s/GSSAPIAuthentication yes/GSSAPIAuthentication no/g&quot;</span> /etc/ssh/sshd_config
-  <span class="token function">service</span> sshd restart <span class="token comment"># sshd&#x670D;&#x52A1;&#x91CD;&#x542F;</span>
-<span class="token punctuation">}</span>
+  #sed  -i &apos;/^#Port/c Port 6022&apos;  /etc/ssh/sshd_config  &amp;&gt;/dev/null  # &#x9ED8;&#x8BA4;&#x7AEF;&#x53E3;&#x4FEE;&#x6539;
+  grep &apos;#UseDNS yes&apos; /etc/ssh/sshd_config &amp;&amp; sed -i &quot;s/#UseDNS yes/UseDNS no/g&quot; /etc/ssh/sshd_config
+  grep &apos;#AuthorizedKeysFile&apos; /etc/ssh/sshd_config &amp;&amp; sed -i &quot;s/#AuthorizedKeysFile/AuthorizedKeysFile/&quot; /etc/ssh/sshd_config
+  grep &apos;GSSAPIAuthentication yes&apos; /etc/ssh/sshd_config &amp;&amp; sed -i &quot;s/GSSAPIAuthentication yes/GSSAPIAuthentication no/g&quot; /etc/ssh/sshd_config
+  service sshd restart # sshd&#x670D;&#x52A1;&#x91CD;&#x542F;
+}
 
-<span class="token function-name function">Set_limits</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  color_message <span class="token string">&quot;info&quot;</span> <span class="token string">&quot;limits&quot;</span>
-  <span class="token function">chmod</span> +x /etc/rc.local
-  <span class="token function">grep</span> <span class="token builtin class-name">ulimit</span> /etc/rc.local <span class="token operator">||</span> <span class="token builtin class-name">echo</span> <span class="token builtin class-name">ulimit</span> -HSn <span class="token number">1048576</span> <span class="token operator">&gt;&gt;</span>/etc/rc.local
+Set_limits() {
+  color_message &quot;info&quot; &quot;limits&quot;
+  chmod +x /etc/rc.local
+  grep ulimit /etc/rc.local || echo ulimit -HSn 1048576 &gt;&gt;/etc/rc.local
 
-  <span class="token function">grep</span> <span class="token number">1048576</span> /etc/security/limits.conf <span class="token operator">||</span> <span class="token function">cat</span> <span class="token operator">&gt;&gt;</span>/etc/security/limits.conf <span class="token operator">&lt;&lt;</span><span class="token string">EOF
+  grep 1048576 /etc/security/limits.conf || cat &gt;&gt;/etc/security/limits.conf &lt;&lt;EOF
 * soft nproc 1048576
 * hard nproc 1048576
 * soft nofile 1048576
 * hard nofile 1048576
 * soft stack 1048575
-EOF</span>
-<span class="token punctuation">}</span>
+EOF
+}
 
-<span class="token function-name function">Set_profile</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  color_message <span class="token string">&quot;info&quot;</span> <span class="token string">&quot;profile&quot;</span>
-  <span class="token function">grep</span> <span class="token function">vi</span> ~/.bashrc <span class="token operator">||</span> <span class="token function">sed</span> -i <span class="token string">&quot;/mv/a<span class="token entity" title="\a">\a</span>lias vi=&apos;vim&apos;&quot;</span> ~/.bashrc
-  <span class="token function">grep</span> PS /etc/profile <span class="token operator">||</span> <span class="token builtin class-name">echo</span> <span class="token string">&apos;&apos;</span>&apos;<span class="token environment constant">PS1</span><span class="token operator">=</span><span class="token string">&quot;\[<span class="token entity" title="\e">\e</span>[37;1m\][\[<span class="token entity" title="\e">\e</span>[32;1m\]\u\[<span class="token entity" title="\e">\e</span>[37;40m\]@\[<span class="token entity" title="\e">\e</span>[34;1m\]\h \[<span class="token entity" title="\e">\e</span>[0m\]<span class="token entity" title="\t">\t</span> \[<span class="token entity" title="\e">\e</span>[35;1m\]\W\[<span class="token entity" title="\e">\e</span>[37;1m\]]\[<span class="token entity" title="\e">\e</span>[m\]/<span class="token entity" title="\\">\\</span>$&quot;</span> <span class="token string">&apos;&apos;</span>&apos; <span class="token operator">&gt;&gt;</span>/etc/profile
-  <span class="token function">grep</span> HISTTIMEFORMAT /etc/profile <span class="token operator">||</span> <span class="token builtin class-name">echo</span> <span class="token string">&apos;&apos;</span>&apos;export <span class="token assign-left variable">HISTTIMEFORMAT</span><span class="token operator">=</span><span class="token string">&quot;%F %T <span class="token variable"><span class="token variable">`</span><span class="token function">whoami</span><span class="token variable">`</span></span> &quot;</span> <span class="token string">&apos;&apos;</span>&apos; <span class="token operator">&gt;&gt;</span>/etc/profile
-<span class="token punctuation">}</span>
+Set_profile() {
+  color_message &quot;info&quot; &quot;profile&quot;
+  grep vi ~/.bashrc || sed -i &quot;/mv/a\alias vi=&apos;vim&apos;&quot; ~/.bashrc
+  grep PS /etc/profile || echo &apos;&apos;&apos;PS1=&quot;\[\e[37;1m\][\[\e[32;1m\]\u\[\e[37;40m\]@\[\e[34;1m\]\h \[\e[0m\]\t \[\e[35;1m\]\W\[\e[37;1m\]]\[\e[m\]/\\$&quot; &apos;&apos;&apos; &gt;&gt;/etc/profile
+  grep HISTTIMEFORMAT /etc/profile || echo &apos;&apos;&apos;export HISTTIMEFORMAT=&quot;%F %T `whoami` &quot; &apos;&apos;&apos; &gt;&gt;/etc/profile
+}
 
-<span class="token function-name function">Optimize_Performance</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  color_message <span class="token string">&quot;info&quot;</span> <span class="token string">&quot;kernel optimize &quot;</span>
+Optimize_Performance() {
+  color_message &quot;info&quot; &quot;kernel optimize &quot;
 
-  <span class="token function">grep</span> <span class="token number">65535</span> /etc/sysctl.conf <span class="token operator">||</span> <span class="token function">cat</span> <span class="token operator">&gt;</span>/etc/sysctl.conf <span class="token operator">&lt;&lt;</span><span class="token string">EOF
+  grep 65535 /etc/sysctl.conf || cat &gt;/etc/sysctl.conf &lt;&lt;EOF
 fs.file-max = 9999999
 # &#x6240;&#x6709;&#x8FDB;&#x7A0B;&#x6700;&#x5927;&#x7684;&#x6587;&#x4EF6;&#x6570;
 fs.nr_open = 9999999
@@ -1404,23 +1404,23 @@ net.nf_conntrack_max = 262144
 #net.ipv4.conf.all.send_redirects = 0
 #net.ipv4.conf.default.send_redirects = 0
 #&#x7981;&#x6B62;&#x6570;&#x636E;&#x5305;&#x91CD;&#x5B9A;&#x5411;&#x53D1;&#x9001; (&#x5B89;&#x5168;)
-EOF</span>
+EOF
 
   sysctl -p
-<span class="token punctuation">}</span>
+}
 
-<span class="token function-name function">Set_passwd</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token builtin class-name">echo</span> <span class="token string">&quot;tmp123456&quot;</span> <span class="token operator">|</span> <span class="token function">passwd</span> --stdin <span class="token string">&quot;root&quot;</span> <span class="token comment">#&#x4FEE;&#x6539;&#x5BC6;&#x7801;</span>
-<span class="token punctuation">}</span>
+Set_passwd() {
+  echo &quot;tmp123456&quot; | passwd --stdin &quot;root&quot; #&#x4FEE;&#x6539;&#x5BC6;&#x7801;
+}
 
-<span class="token assign-left variable">rhel_version</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token function">grep</span> -oP <span class="token string">&apos;\d&apos;</span> /etc/redhat-release <span class="token operator">|</span> <span class="token function">head</span> -1<span class="token variable">)</span></span>
-<span class="token comment">#&#x7CFB;&#x7EDF;&#x7248;&#x672C;</span>
-Init_Install <span class="token variable">$1</span>
-<span class="token comment">#&#x8C03;&#x7528;&#x6267;&#x884C;</span>
+rhel_version=$(grep -oP &apos;\d&apos; /etc/redhat-release | head -1)
+#&#x7CFB;&#x7EDF;&#x7248;&#x672C;
+Init_Install $1
+#&#x8C03;&#x7528;&#x6267;&#x884C;
 
-<span class="token builtin class-name">echo</span> <span class="token string">&quot;++++++++++++++++ END To Initialize Server  +++++++++++++++++&quot;</span>
-<span class="token comment">#reboot</span>
-<span class="token function">rm</span> <span class="token variable">$0</span> -f <span class="token comment"># &#x56DE;&#x6536;&#x6B64;&#x811A;&#x672C;&#x6587;&#x4EF6;</span>
+echo &quot;++++++++++++++++ END To Initialize Server  +++++++++++++++++&quot;
+#reboot
+rm $0 -f # &#x56DE;&#x6536;&#x6B64;&#x811A;&#x672C;&#x6587;&#x4EF6;
 </code></pre>
 <footer class="page-footer"><span class="copyright">Copyright &#xA9;  2020 all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x7F16;&#x8F91;&#x65F6;&#x95F4;&#xFF1A;
 2020-05-15 17:58:54
@@ -1463,7 +1463,7 @@ Init_Install <span class="token variable">$1</span>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"环境准备","level":"1.2","depth":1,"next":{"title":"基础网络设备配置","level":"1.3","depth":1,"ref":"","articles":[{"title":"路由器","level":"1.3.1","depth":2,"path":"network/router.md","ref":"network/router.md","articles":[]},{"title":"交换机","level":"1.3.2","depth":2,"path":"network/switch.md","ref":"network/switch.md","articles":[]},{"title":"防火墙","level":"1.3.3","depth":2,"path":"network/firewall.md","ref":"network/firewall.md","articles":[]},{"title":"远程执行脚本","level":"1.3.4","depth":2,"path":"network/scripts.md","ref":"network/scripts.md","articles":[]},{"title":"IDC 网络高可用架构 - H3C","level":"1.3.5","depth":2,"path":"network/ha.md","ref":"network/ha.md","articles":[]},{"title":"办公网无线 AP 部署改造 - TP-LINK","level":"1.3.6","depth":2,"path":"network/tp-link.md","ref":"network/tp-link.md","articles":[]}]},"previous":{"title":"前言","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-lunr","-search","search-pro","-highlight","prism","expandable-chapters","chapter-fold","back-to-top-button","splitter","-simple-page-toc","page-toc-button","tbfed-pagefooter","-fontsettings","hide-element","click-reveal","custom-favicon","insert-logo","livereload"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright &copy  2020","modify_label":"该文件编辑时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"chapter-fold":{},"prism":{"css":["prismjs/themes/prism-tomorrow.css"]},"livereload":{},"splitter":{},"search-pro":{},"hide-element":{"elements":[".gitbook-link",".copyright",".pull-right"]},"click-reveal":{},"favicon":"/images/favicon.ico","page-toc-button":{"maxTocDepth":3,"minTocSize":2},"back-to-top-button":{},"custom-favicon":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"style":"background: none; max-height: 30px; min-height: 30px","url":"/images/logo.png"},"expandable-chapters":{}},"theme":"default","author":"LJ","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Mybook","language":"zh-hans","gitbook":"*","description":"markdown笔记"},"file":{"path":"environment.md","mtime":"2020-05-15T09:58:54.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-05-15T13:57:07.260Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"环境准备","level":"1.2","depth":1,"next":{"title":"基础网络设备配置","level":"1.3","depth":1,"ref":"","articles":[{"title":"路由器","level":"1.3.1","depth":2,"path":"network/router.md","ref":"network/router.md","articles":[]},{"title":"交换机","level":"1.3.2","depth":2,"path":"network/switch.md","ref":"network/switch.md","articles":[]},{"title":"防火墙","level":"1.3.3","depth":2,"path":"network/firewall.md","ref":"network/firewall.md","articles":[]},{"title":"远程执行脚本","level":"1.3.4","depth":2,"path":"network/scripts.md","ref":"network/scripts.md","articles":[]},{"title":"IDC 网络高可用架构 - H3C","level":"1.3.5","depth":2,"path":"network/ha.md","ref":"network/ha.md","articles":[]},{"title":"办公网无线 AP 部署改造 - TP-LINK","level":"1.3.6","depth":2,"path":"network/tp-link.md","ref":"network/tp-link.md","articles":[]}]},"previous":{"title":"前言","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-lunr","-search","search-pro","-highlight","prism","expandable-chapters","chapter-fold","back-to-top-button","splitter","-simple-page-toc","page-toc-button","tbfed-pagefooter","-fontsettings","hide-element","click-reveal","custom-favicon","insert-logo","livereload"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright &copy  2020","modify_label":"该文件编辑时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"chapter-fold":{},"prism":{"css":["prismjs/themes/prism-tomorrow.css"]},"livereload":{},"splitter":{},"search-pro":{},"hide-element":{"elements":[".gitbook-link",".copyright",".pull-right"]},"click-reveal":{},"favicon":"/images/favicon.ico","page-toc-button":{"maxTocDepth":3,"minTocSize":2},"back-to-top-button":{},"custom-favicon":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"style":"background: none; max-height: 30px; min-height: 30px","url":"/images/logo.png"},"expandable-chapters":{}},"theme":"default","author":"LJ","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Mybook","language":"zh-hans","gitbook":"*","description":"markdown笔记"},"file":{"path":"environment.md","mtime":"2020-05-15T09:58:54.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-05-15T16:58:27.422Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

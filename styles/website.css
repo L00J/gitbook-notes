@@ -11,3 +11,41 @@ pre[class*='language-'] {
   border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.3) 2px 3px 2px;
 }
+
+html,
+body {
+  height: 100%;
+}
+body,
+div {
+  margin: 0;
+  padding: 0;
+  color: #f00;
+}
+* html {
+  padding-top: 100px;
+} /*for ie6*/
+.top {
+  background: #36c;
+  height: 100px;
+}
+* html .top {
+  background: #36c;
+  height: 100px;
+  position: absolute;
+  top: 0;
+  width: 100%;
+} /*for ie6*/
+.main {
+  background: #f90;
+  position: absolute;
+  width: 100%;
+  top: 100px;
+  bottom: 0;
+  overflow: auto;
+}
+* html .main {
+  background: #f90;
+  position: static;
+  height: 100%;
+} /*for ie6*/
